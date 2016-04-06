@@ -1,37 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class NumberWizard : MonoBehaviour {
   
   int max;
   int min;
   int guess;
+  int maxGuessesAllowed = 10;
 	// Use this for initialization
-	void Start () {
+  void Start () {
     startGame ();
-	}
+  }
+  
+  public Text text;
 	
-	// Update is called once per frame
-	void Update () {
-    if (Input.GetKeyDown (KeyCode.UpArrow)) {
-      min = guess;
-      guess = (max + min) / 2;
-      updateUser ();
-    }
-    else if (Input.GetKeyDown (KeyCode.DownArrow)) {
-      max = guess;
-      guess = guess / 2;
-      updateUser ();
-    }
-    else if (Input.GetKeyDown (KeyCode.Return)) {
-      print ("I Won!!");
-      startGame ();
-    }
-	}
+  public void guessHigher () {
+	min = guess;
+	guess = (max + min) / 2;
+	updateUser ();
+  }
+  
+  public void guessLower () {
+	max = guess;
+	guess = guess / 2;
+	updateUser ();
+  }
+  
+  public void correct () {
+	Application.LoadLevel ("Lose");
+  }
   
   void updateUser () {
     print ("Is the number higher or lower than " + guess + "?");
     print ("Up arrow for lower, Down arrow for higher and return for equal");
+    maxGuessesAllowed--;
+    if (maxGuessesAllowed == 0){
+      Application.LoadLevel ("Win");
+    }
+	text.text = guess.ToString ();
   }
   
   void startGame (){
