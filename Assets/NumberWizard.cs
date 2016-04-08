@@ -43,8 +43,8 @@ public class NumberWizard : MonoBehaviour {
   
   void startGame (){
     max = 1000;
-    min = 1;
-    guess = 500;
+    min = 0;
+    guess = Random.Range(0, 1000);
     print ("Welcome to Number Wizard!!");
     print ("Pick a number in your head, but don't tell me!");
     print ("The highest number you can pick is " + max);
