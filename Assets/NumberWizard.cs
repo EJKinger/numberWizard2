@@ -7,7 +7,7 @@ public class NumberWizard : MonoBehaviour {
   int max;
   int min;
   int guess;
-  int maxGuessesAllowed = 10;
+  int maxGuessesAllowed = 12;
 	// Use this for initialization
   void Start () {
     startGame ();
@@ -23,7 +23,7 @@ public class NumberWizard : MonoBehaviour {
   
   public void guessLower () {
 	max = guess;
-	guess = guess / 2;
+	guess = (max + min) / 2;
 	updateUser ();
   }
   
@@ -44,7 +44,7 @@ public class NumberWizard : MonoBehaviour {
   void startGame (){
     max = 1000;
     min = 0;
-    guess = Random.Range(0, 1000);
+    guess = Random.Range(min, max + 1);
     print ("Welcome to Number Wizard!!");
     print ("Pick a number in your head, but don't tell me!");
     print ("The highest number you can pick is " + max);
